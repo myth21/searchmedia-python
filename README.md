@@ -127,9 +127,9 @@ Run it as a module, `python -m searchmedia`, from the repository root. Running `
 
 ## Tests
 
-The tests use the standard `unittest`, so no extra dependencies are needed. They make no network requests: external API responses come from fixtures.
+The tests use the standard `unittest`, so no test framework needs to be installed, but the app's own dependencies do. They make no network requests: external API responses come from fixtures.
 
-Locally, from the repository root:
+Locally, from the repository root, with the virtual environment from "Running locally" activated:
 
 ```bash
 python -m unittest discover -s tests
