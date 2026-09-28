@@ -1,0 +1,9 @@
+services:
+  searchmedia:
+    build: .
+    env_file:
+      - path: .env
+        required: false
+    ports:
+      - "127.0.0.1:${SEARCHMEDIA_HOST_PORT:-8082}:80"
+    restart: unless-stopped
