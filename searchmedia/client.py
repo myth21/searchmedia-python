@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+# Klipy answers 403 to urllib's default "Python-urllib/3.x".
+USER_AGENT = "searchmedia/1.0"
 
 @dataclass(frozen=True)
 class HttpResponse:
@@ -26,7 +28,7 @@ class HttpClient:
         self._timeout_seconds = timeout_seconds
 
     def get(self, url: str, headers: dict[str, str] | None = None) -> HttpResponse:
-        request = Request(url, headers=headers or {}, method="GET")
+        request = Request(url, headers={"User-Agent": USER_AGENT, **(headers or {})}, method="GET")
 
         try:
             with urlopen(request, timeout=self._timeout_seconds) as response:

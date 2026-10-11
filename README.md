@@ -8,8 +8,6 @@ A media search service in Python (FastAPI + Uvicorn). It searches GIFs and image
 |---|---|
 | `GET /api/v1/searchmedia` | Search. At most one request per 5 seconds from one IP |
 | `GET /api/v1/searchmedia/service-names` | List of available services |
-| `GET /api/searchmedia/v1/swagger/` | Swagger UI |
-| `GET /openapi.json` | OpenAPI specification |
 
 Search parameters:
 
@@ -64,8 +62,8 @@ All settings come from environment variables prefixed with `SEARCHMEDIA_`.
 | `SEARCHMEDIA_KLIPY_KEY` | - | Klipy key |
 | `SEARCHMEDIA_GOOGLE_KEY` | - | Google Custom Search key |
 | `SEARCHMEDIA_GOOGLE_CX` | - | Google search engine ID (cx) |
-| `SEARCHMEDIA_SPECIFICATION_URL` | `/api/searchmedia/v1/swagger/` | Specification link in error bodies |
-| `SEARCHMEDIA_DOCUMENTATION_URL` | `/api/searchmedia/v1/doc/` | Documentation link in `429` error bodies |
+| `SEARCHMEDIA_SPECIFICATION_URL` | - | Specification link in error bodies |
+| `SEARCHMEDIA_DOCUMENTATION_URL` | - | Documentation link in `429` error bodies |
 | `SEARCHMEDIA_HOST_PORT` | `8082` | Port on your machine. Read only by `compose.yaml`, not by the app |
 
 The app starts even without keys. A service without a key just answers with an error and is marked as unavailable.
@@ -84,7 +82,7 @@ Build the image and start the service:
 docker compose up -d --build
 ```
 
-The API is available at `http://127.0.0.1:8082`, Swagger at `http://127.0.0.1:8082/api/searchmedia/v1/swagger/`.
+The API is available at `http://127.0.0.1:8082`.
 
 The port on your machine is set by `SEARCHMEDIA_HOST_PORT` in `.env` (8082 if not set; the examples in this README use it). Inside the container the app always listens on 80. The service is reachable only from this machine; to open it to the network, remove `127.0.0.1:` from `ports` in `compose.yaml`.
 
